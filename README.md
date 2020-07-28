@@ -48,7 +48,7 @@ link will look like following if your on localhoast
 http://localhost:3000/
 ```
 After that you can login with following credentials
-```form-data
-email:admin@admin.com
-password:passowrd
+```json
+email:"admin@admin.com"
+password:"passowrd"
 ```
