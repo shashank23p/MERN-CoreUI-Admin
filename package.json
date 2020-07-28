@@ -1,0 +1,29 @@
+{
+  "name": "mern-admin",
+  "version": "1.0.0",
+  "description": "Node server to work with mern admin, React Redux front end will work great with it. refresh token login implimintation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js",
+    "start": "concurrently --kill-others \"nodemon app.js\" \"npm start --prefix reactAdmin/\"",
+    "build": "npm run build --prefix reactAdmin",
+    "install-both": "npm i && npm --prefix reactAdmin/ install reactAdmin/"
+  },
+  "author": "Shashank Padwal",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.25",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
+}

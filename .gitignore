@@ -1,0 +1,5 @@
+.env
+# dependencies
+node_modules/
+/reactAdmin/node_modules/
+/public/admin
