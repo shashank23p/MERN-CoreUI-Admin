@@ -10,7 +10,8 @@ git pull https://github.com/shashank23p/MERN-CoreUI-Admin
 ```bash
 npm run install-both
 ```
-**3) Create mongoDB and create collection users and insert a dummy admin user data**
+**3) Creating MongoDb**<br>
+create a mongo instance and create collection with name ***users*** and insert a dummy admin user data provided below
 ```json
 {
     "group": "admin",
@@ -23,7 +24,8 @@ npm run install-both
     }
 }
 ```
-**4) Create file with name .env in root folder and add following details**
+**4) Creating Environment variables**<br>
+Create file with name ***.env*** in root folder and add following details
 ```bash
 DB_CONNECTION= mongoConnectionString
 TOKEN_SEC= authTokenSecret
@@ -38,4 +40,15 @@ npm start
 you can also run only node server using 
 ```bash
 npm run server
+```
+**6) Logging In**<br>
+now you can visite the link provided on terminal, It will also open in yout default browser by default after react dev server launched<br>
+link will look like following if your on localhoast 
+```bash 
+http://localhost:3000/
+```
+After that you can login with following credentials
+```form-data
+email:admin@admin.com
+password:passowrd
 ```
