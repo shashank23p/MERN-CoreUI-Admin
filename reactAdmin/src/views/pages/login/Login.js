@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -12,11 +12,16 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow,
+  CCardGroup,
+  CCardFooter,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeReq, refreshAuthToken } from "../../../libs/apiHandler";
+import { queryStringParse } from "../../../libs/mylibs";
+
 const Login = () => {
+  const message = queryStringParse(window.location.hash).message;
   const refreshLogin = async () => {
     await refreshAuthToken();
     setPageLoading(false);
@@ -30,7 +35,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isloding, setLoding] = useState(false);
-  let subButton;
   const is_login = useSelector((state) => state.login.is_login);
   if (is_login) return <Redirect to="/" />;
   const loginReq = async (e) => {
@@ -61,19 +65,7 @@ const Login = () => {
     }
     setLoding(false);
   };
-  if (!isloding) {
-    subButton = (
-      <CButton color="primary" className="px-4" type="submit">
-        Login
-      </CButton>
-    );
-  } else {
-    subButton = (
-      <CButton color="primary" className="px-4" type="submit" disabled>
-        Loding..
-      </CButton>
-    );
-  }
+
   if (pageLoding) {
     return (
       <div className="c-app  flex-row align-items-center justify-content-center">
@@ -88,47 +80,80 @@ const Login = () => {
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md="6">
-            <CCard className="p-4">
-              <CCardBody>
-                <CForm onSubmit={(e) => loginReq(e)}>
-                  <h1>Login</h1>
-                  <p className="text-muted">Sign In to your account</p>
-                  <p className="errorText">{error}</p>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon name="cil-user" />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
-                      type="email"
-                      placeholder="Email"
-                      autoComplete="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon name="cil-lock-locked" />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </CInputGroup>
+            <CCardGroup>
+              <CCard>
+                <CCardBody>
+                  <CForm onSubmit={(e) => loginReq(e)} className="p-4">
+                    <h1>Login</h1>
+                    <p className="text-muted">Sign In to your account</p>
+                    {message ? (
+                      <div className="alert alert-success" role="alert">
+                        {message}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    <p className="errorText">{error}</p>
+                    <CInputGroup className="mb-3">
+                      <CInputGroupPrepend>
+                        <CInputGroupText>
+                          <CIcon name="cil-user" />
+                        </CInputGroupText>
+                      </CInputGroupPrepend>
+                      <CInput
+                        type="email"
+                        placeholder="Email"
+                        autoComplete="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </CInputGroup>
+                    <CInputGroup className="mb-4">
+                      <CInputGroupPrepend>
+                        <CInputGroupText>
+                          <CIcon name="cil-lock-locked" />
+                        </CInputGroupText>
+                      </CInputGroupPrepend>
+                      <CInput
+                        type="password"
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </CInputGroup>
+                    <CRow>
+                      <CCol xs="6">
+                        <CButton
+                          color="primary"
+                          className="px-4"
+                          type="submit"
+                          disabled={isloding}
+                        >
+                          {isloding ? "Loding..." : "Login"}
+                        </CButton>
+                      </CCol>
+                    </CRow>
+                  </CForm>
+                </CCardBody>
+                <CCardFooter>
                   <CRow>
-                    <CCol xs="6">{subButton}</CCol>
+                    <CCol xs="12" sm="6">
+                      <p className="m-0">
+                        <Link to="/"> Forget Password?</Link>
+                      </p>
+                    </CCol>
+                    <CCol xs="12" sm="6">
+                      <p className="m-0 text-right">
+                        Are you New Here?
+                        <Link to="/register"> Register Now!</Link>
+                      </p>
+                    </CCol>
                   </CRow>
-                </CForm>
-              </CCardBody>
-            </CCard>
+                </CCardFooter>
+              </CCard>
+            </CCardGroup>
           </CCol>
         </CRow>
       </CContainer>

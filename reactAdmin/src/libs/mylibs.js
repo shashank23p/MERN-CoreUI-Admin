@@ -12,4 +12,18 @@ const logout = async () => {
     });
 };
 
-export { logout };
+const queryStringParse = (string) => {
+  let parsed = {};
+  if (string !== "") {
+    string = string.substring(string.indexOf("?") + 1);
+    const queryItems = string.split("&");
+    queryItems.forEach((item) => {
+      let params = item.split("=");
+      params[1] = decodeURI(params[1]);
+      parsed[params[0]] = params[1];
+    });
+  }
+  return parsed;
+};
+
+export { logout, queryStringParse };
