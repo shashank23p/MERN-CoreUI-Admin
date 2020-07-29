@@ -9,6 +9,7 @@ const logout = async () => {
       is_login: false,
       name: "",
       email: "",
+      groups: "",
       auth_token: null,
       is_admin: false,
     });
@@ -33,6 +34,7 @@ const getLoginReduxState = (data, headers) => {
     type: "setLogin",
     name: data.payload.name,
     email: data.payload.email,
+    groups: data.payload.groups,
     is_login: true,
     auth_token: headers["auth-token"],
     is_admin: data.payload.is_admin,

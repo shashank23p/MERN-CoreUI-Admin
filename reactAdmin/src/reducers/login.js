@@ -1,5 +1,6 @@
 const initialState = {
   is_login: false,
+  groups: "",
   name: "",
   email: "",
   auth_token: null,

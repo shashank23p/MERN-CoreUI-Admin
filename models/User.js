@@ -19,9 +19,9 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  group: {
-    type: String,
-    default: "member",
+  groups: {
+    type: Array,
+    default: ["member"],
   },
   is_admin: {
     type: Boolean,
