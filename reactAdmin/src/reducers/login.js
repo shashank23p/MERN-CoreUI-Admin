@@ -1,7 +1,9 @@
 const initialState = {
   is_login: false,
+  name: "",
   email: "",
   auth_token: null,
+  is_admin: "",
 };
 
 const loginReducer = (state = initialState, { type, ...rest }) => {

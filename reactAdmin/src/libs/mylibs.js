@@ -7,8 +7,10 @@ const logout = async () => {
     store.dispatch({
       type: "setLogin",
       is_login: false,
+      name: "",
       email: "",
       auth_token: null,
+      is_admin: false,
     });
 };
 
@@ -26,4 +28,15 @@ const queryStringParse = (string) => {
   return parsed;
 };
 
-export { logout, queryStringParse };
+const getLoginReduxState = (data, headers) => {
+  return {
+    type: "setLogin",
+    name: data.payload.name,
+    email: data.payload.email,
+    is_login: true,
+    auth_token: headers["auth-token"],
+    is_admin: data.payload.is_admin,
+  };
+};
+
+export { logout, queryStringParse, getLoginReduxState };

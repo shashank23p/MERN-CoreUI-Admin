@@ -50,6 +50,7 @@ const getJWTFromRefreshJWT = (refresh_token) => {
     payload = {
       id: data.id,
       name: data.name,
+      email: data.email,
       is_admin: data.is_admin,
     };
     auth_token = createAuthJWT(payload);

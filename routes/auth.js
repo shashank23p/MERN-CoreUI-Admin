@@ -54,15 +54,18 @@ router.post("/login", async (req, res) => {
   const payload = {
     id: user.id,
     name: user.name,
+    email: user.email,
     is_admin: user.is_admin,
   };
   const auth_token = createAuthJWT(payload);
   const refresh_token = createRefreshJWT(payload);
   if (auth_token) {
     res.cookie("refresh_token", refresh_token, { httpOnly: true });
-    res
-      .header("auth-token", auth_token)
-      .json({ message: "Login Successful", refresh_token: refresh_token });
+    res.header("auth-token", auth_token).json({
+      message: "Login Successful",
+      payload: payload,
+      refresh_token: refresh_token,
+    });
   } else res.json({ error: "Something went wrong" });
 });
 router.get("/logout", async (req, res) => {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { logout } from "./mylibs";
+import { logout, getLoginReduxState } from "./mylibs";
 import store from "../store";
 
 const makeCall = async (url, methode, config, payload) => {
@@ -46,12 +46,7 @@ const refreshAuthToken = async () => {
     return false;
   } else {
     console.log("login refreshed");
-    store.dispatch({
-      type: "setLogin",
-      email: data.payload.email,
-      is_login: true,
-      auth_token: headers["auth-token"],
-    });
+    store.dispatch(getLoginReduxState(data, headers));
     console.log("store updated");
     return headers["auth-token"];
   }

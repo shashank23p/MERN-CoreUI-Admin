@@ -18,7 +18,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeReq, refreshAuthToken } from "../../../libs/apiHandler";
-import { queryStringParse } from "../../../libs/mylibs";
+import { queryStringParse, getLoginReduxState } from "../../../libs/mylibs";
 
 const Login = () => {
   const message = queryStringParse(window.location.hash).message;
@@ -53,12 +53,7 @@ const Login = () => {
       );
       if (data.error) setError(data.error);
       else if (data.refresh_token) {
-        dispatch({
-          type: "setLogin",
-          is_login: true,
-          email: email,
-          auth_token: headers["auth-token"],
-        });
+        dispatch(getLoginReduxState(data, headers));
       }
     } catch (error) {
       setError(error.message);
