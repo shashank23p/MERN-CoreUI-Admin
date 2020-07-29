@@ -4,15 +4,8 @@ const { loginChecker } = require("../libs/jwtLib");
 require("dotenv/config");
 //check if user is logged in
 router.use(loginChecker);
-//only allow admin to access this routes
-router.use((req, res, next) => {
-  try {
-    if (req.session.is_admin) next();
-    else res.json({ error: "Not Authorized" });
-  } catch (error) {}
-});
 router.get("/", async (req, res) => {
-  res.json({ message: "you are in admin" });
+  res.json({ message: "you are in member" });
 });
 
 module.exports = router;

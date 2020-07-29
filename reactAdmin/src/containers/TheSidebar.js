@@ -15,11 +15,16 @@ import {
 import CIcon from "@coreui/icons-react";
 
 // sidebar nav config
-import navigation from "./_nav";
+import { adminNav, memberNav } from "./_nav";
 
 const TheSidebar = () => {
+  let navigation = [];
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebar.show);
+  const is_admin = useSelector((state) => state.login.is_admin);
+  if (is_admin) navigation = adminNav;
+  else navigation = memberNav;
+
   return (
     <CSidebar
       show={show}

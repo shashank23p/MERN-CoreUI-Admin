@@ -7,6 +7,7 @@ require("dotenv/config");
 //routes
 const authRoute = require("./routes/auth.js");
 const adminRoute = require("./routes/admin.js");
+const memberRoute = require("./routes/member.js");
 //middleweres
 //converting body into json using body parser
 app.use(cookieParser());
@@ -15,6 +16,7 @@ app.use("/", express.static("public"));
 app.use("/admin", express.static("public"));
 app.use("/api/auth", authRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/member", memberRoute);
 
 //connect to mongoDB
 mongoose.connect(

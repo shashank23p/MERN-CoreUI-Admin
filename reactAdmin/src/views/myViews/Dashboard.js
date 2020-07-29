@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { makeReq } from "../../libs/apiHandler";
-const Home = () => {
+const Dashboard = () => {
   const [res, setRes] = useState("");
   const auth_token = useSelector((state) => state.login.auth_token);
   const getAdmin = async () => {
@@ -31,4 +31,4 @@ const Home = () => {
   return <h1>res:{res}</h1>;
 };
 
-export default Home;
+export default Dashboard;

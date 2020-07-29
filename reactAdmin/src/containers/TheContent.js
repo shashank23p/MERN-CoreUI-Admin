@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { CContainer, CFade } from "@coreui/react";
-
+import { useSelector } from "react-redux";
 // routes config
 import routes from "../routes";
 
@@ -12,6 +12,8 @@ const loading = (
 );
 
 const TheContent = () => {
+  const is_admin = useSelector((state) => state.login.is_admin);
+
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -34,7 +36,11 @@ const TheContent = () => {
                 )
               );
             })}
-            <Redirect from="/" to="/home" />
+            {is_admin ? (
+              <Redirect from="/" to="/dashboard" />
+            ) : (
+              <Redirect from="/" to="/memberdashboard" />
+            )}
           </Switch>
         </Suspense>
       </CContainer>
