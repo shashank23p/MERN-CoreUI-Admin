@@ -24,7 +24,6 @@ const TheSidebar = () => {
   const groups = useSelector((state) => state.login.groups);
   // if (is_admin) navigation = nav.filter;
   navigation = getNavigation(groups);
-  console.log(navigation);
   return (
     <CSidebar
       show={show}
