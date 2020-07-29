@@ -7,6 +7,7 @@ const {
   createAuthJWT,
   createRefreshJWT,
   getJWTFromRefreshJWT,
+  hashPassword,
 } = require("../libs/jwtLib");
 //default route
 router.get("/", async (req, res) => {
@@ -25,18 +26,17 @@ router.post("/register", async (req, res) => {
     if (emailExits) return res.json({ error: "Email already exists" });
 
     //hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassowrd = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await hashPassword(req.body.password);
     const user = new User({
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassowrd,
+      password: hashedPassword,
     });
 
     const savedUser = await user.save();
     res.json({ user: savedUser });
-  } catch (err) {
-    res.json({ error: err.message });
+  } catch (error) {
+    res.json({ error: error.message });
   }
 });
 

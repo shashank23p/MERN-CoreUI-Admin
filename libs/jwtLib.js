@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-
+const bcrypt = require("bcryptjs");
 const loginChecker = (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) return res.json({ error: "access denied", noLogin: true });
@@ -59,8 +59,18 @@ const getJWTFromRefreshJWT = (refresh_token) => {
     return false;
   }
 };
+const hashPassword = async (password) => {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    return hashedPassword;
+  } catch (error) {
+    return false;
+  }
+};
 module.exports.loginChecker = loginChecker;
 module.exports.verifyJWT = verifyJWT;
 module.exports.createAuthJWT = createAuthJWT;
 module.exports.createRefreshJWT = createRefreshJWT;
 module.exports.getJWTFromRefreshJWT = getJWTFromRefreshJWT;
+module.exports.hashPassword = hashPassword;

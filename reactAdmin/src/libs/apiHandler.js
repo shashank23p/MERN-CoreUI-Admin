@@ -12,7 +12,7 @@ const makeCall = async (url, methode, config, payload) => {
       return { data, headers };
     }
   } catch (error) {
-    return { data: { error: error } };
+    return { data: { error: error.message } };
   }
 };
 const makeReq = async (url, methode, config = {}, payload = {}) => {
@@ -21,9 +21,12 @@ const makeReq = async (url, methode, config = {}, payload = {}) => {
     if (data.noLogin) {
       const auth_token = await refreshAuthToken();
       if (!auth_token) {
-        console.log("Unable to refresh login, loging out");
         logout();
       } else {
+        if (!config || !config.headers)
+          return {
+            data: { error: "Config headers not set for secure route" },
+          };
         config.headers["auth-token"] = auth_token;
         //making call again
         const { data, headers } = await makeCall(url, methode, config, payload);
@@ -35,7 +38,7 @@ const makeReq = async (url, methode, config = {}, payload = {}) => {
     }
     return { data, headers };
   } catch (error) {
-    return { data: { error: error } };
+    return { data: { error: error.message } };
   }
 };
 

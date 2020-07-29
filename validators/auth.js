@@ -16,5 +16,13 @@ const loginValidator = (data) => {
   });
   return Schema.validate(data);
 };
+const changepassValidator = (data) => {
+  const Schema = Joi.object({
+    current_password: Joi.string().required(),
+    new_password: Joi.string().min(6).required(),
+  });
+  return Schema.validate(data);
+};
 module.exports.registerValidator = registerValidator;
 module.exports.loginValidator = loginValidator;
+module.exports.changepassValidator = changepassValidator;

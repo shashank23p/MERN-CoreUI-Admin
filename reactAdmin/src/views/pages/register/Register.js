@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   CButton,
   CCard,
@@ -57,7 +58,8 @@ const Register = () => {
     }
     setLoding(false);
   };
-
+  const is_login = useSelector((state) => state.login.is_login);
+  if (is_login) return <Redirect to="/" />;
   if (pageLoding) {
     return (
       <div className="c-app  flex-row align-items-center justify-content-center">
