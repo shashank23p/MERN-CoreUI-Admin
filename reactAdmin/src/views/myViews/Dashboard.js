@@ -10,14 +10,11 @@ const Dashboard = () => {
         "auth-token": auth_token,
       },
     };
-
     try {
       const { data } = await makeReq("/api/admin/", "get", config);
       if (data) {
-        //not login
-        if (data.noLogin) console.log("not Logged In");
-        //handel other errors
-        else if (data.error) console.log(data.error);
+        //handel  errors
+        if (data.error) console.log(data.error);
         //handel success
         else setRes(data.message);
       }

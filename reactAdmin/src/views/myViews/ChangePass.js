@@ -54,7 +54,6 @@ const ChangePass = () => {
         config,
         payload
       );
-      console.log(data);
       if (data.error) setError(data.error);
       else if (data.message) {
         setCpassword("");
@@ -62,7 +61,6 @@ const ChangePass = () => {
         setNewPassword("");
         setCpassword("");
         setMessage(data.message);
-        setLoding(false);
       }
     } catch (error) {
       setError(error.message);

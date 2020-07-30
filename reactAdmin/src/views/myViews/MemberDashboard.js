@@ -14,10 +14,8 @@ const MemberDashboard = () => {
     try {
       const { data } = await makeReq("/api/member/", "get", config);
       if (data) {
-        //not login
-        if (data.noLogin) console.log("not Logged In");
-        //handel other errors
-        else if (data.error) console.log(data.error);
+        //handel errors
+        if (data.error) console.log(data.error);
         //handel success
         else setRes(data.message);
       }
