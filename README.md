@@ -41,7 +41,12 @@ TOKEN_SEC= authTokenSecret
 TOKEN_EXPIRY=10m // token expiration_time
 REFRESH_SEC= refreshTokenSecret  //must be diffent from TOKEN_SEC
 ```
+you can use following command to genrate tokens in node
+```bash
+node
+crypto.randomBytes(64).toString('hex');
 
+```
 **5. Running developer servers**<br>
 run dev server for both React and node. Node server will start on port 5000 and react dev server on port 3000
 
