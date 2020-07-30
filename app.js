@@ -13,7 +13,6 @@ const memberRoute = require("./routes/member.js");
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use("/", express.static("public"));
-app.use("/admin", express.static("public"));
 app.use("/api/auth", authRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/member", memberRoute);

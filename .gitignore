@@ -2,4 +2,5 @@
 # dependencies
 node_modules/
 /reactAdmin/node_modules/
+/reactAdmin/build/
 /public/admin
