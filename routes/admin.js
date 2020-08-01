@@ -11,6 +11,8 @@ router.use((req, res, next) => {
     else res.json({ error: "Not Authorized" });
   } catch (error) {}
 });
+
+//just a default route for testing
 router.get("/", async (req, res) => {
   res.json({ message: "you are in admin" });
 });
