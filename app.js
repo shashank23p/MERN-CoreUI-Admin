@@ -21,7 +21,7 @@ app.use("/api/member", memberRoute);
 mongoose.connect(
   process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("connected to mongo")
+  () => console.log("Mongo Can be connected")
 );
 
 //starting express server
