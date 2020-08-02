@@ -27,7 +27,6 @@ const createAuthJWT = (data) => {
     id: data.id,
     name: data.name,
     groups: data.groups,
-    subjects: data.subjects,
     email: data.email,
     is_admin: data.is_admin,
   };
@@ -46,7 +45,6 @@ const createRefreshJWT = (data) => {
     id: data.id,
     name: data.name,
     groups: data.groups,
-    subjects: data.subjects,
     email: data.email,
     is_admin: data.is_admin,
   };
@@ -64,7 +62,7 @@ const getJWTFromRefreshJWT = (refresh_token) => {
   try {
     const data = jwt.verify(refresh_token, process.env.REFRESH_SEC);
     auth_token = createAuthJWT(data);
-    return { auth_token, payload };
+    return { auth_token, data };
   } catch (error) {
     return false;
   }

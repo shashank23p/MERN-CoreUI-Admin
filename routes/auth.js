@@ -73,13 +73,13 @@ router.get("/logout", async (req, res) => {
 router.get("/refresh", async (req, res) => {
   try {
     if (req.cookies.refresh_token) {
-      const { auth_token, payload } = getJWTFromRefreshJWT(
+      const { auth_token, data } = getJWTFromRefreshJWT(
         req.cookies.refresh_token
       );
       if (auth_token) {
         res
           .header("auth-token", auth_token)
-          .json({ message: "Refresh Successful", payload: payload });
+          .json({ message: "Refresh Successful", payload: data });
       } else res.json({ error: "You have to login again" });
     } else {
       res.json({ error: "No refrsh token found, You have to login again" });
