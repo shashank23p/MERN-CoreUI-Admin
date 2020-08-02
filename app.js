@@ -20,11 +20,18 @@ app.use("/api/member", memberRoute);
 //connect to mongoDB
 mongoose.connect(
   process.env.DB_CONNECTION,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("Mongo Can be connected")
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (error) => {
+    if (error) console.error("mongoDB:", error.message);
+    else {
+      console.log("mongo connected, starting express server......");
+      //starting express server
+      app.listen(5000, () => {
+        console.log("listning on port 5000");
+      });
+    }
+  }
 );
-
-//starting express server
-app.listen(5000, () => {
-  console.log("listning on port 5000");
-});
