@@ -22,7 +22,15 @@ const verifyJWT = (token, sec) => {
   }
 };
 
-const createAuthJWT = (payload) => {
+const createAuthJWT = (data) => {
+  const payload = {
+    id: data.id,
+    name: data.name,
+    groups: data.groups,
+    subjects: data.subjects,
+    email: data.email,
+    is_admin: data.is_admin,
+  };
   try {
     const token = jwt.sign(payload, process.env.TOKEN_SEC, {
       expiresIn: process.env.TOKEN_EXPIRY,
@@ -33,7 +41,15 @@ const createAuthJWT = (payload) => {
     return false;
   }
 };
-const createRefreshJWT = (payload) => {
+const createRefreshJWT = (data) => {
+  const payload = {
+    id: data.id,
+    name: data.name,
+    groups: data.groups,
+    subjects: data.subjects,
+    email: data.email,
+    is_admin: data.is_admin,
+  };
   try {
     const token = jwt.sign(payload, process.env.REFRESH_SEC, {
       expiresIn: "1y",
@@ -47,14 +63,7 @@ const createRefreshJWT = (payload) => {
 const getJWTFromRefreshJWT = (refresh_token) => {
   try {
     const data = jwt.verify(refresh_token, process.env.REFRESH_SEC);
-    payload = {
-      id: data.id,
-      name: data.name,
-      groups: data.groups,
-      email: data.email,
-      is_admin: data.is_admin,
-    };
-    auth_token = createAuthJWT(payload);
+    auth_token = createAuthJWT(data);
     return { auth_token, payload };
   } catch (error) {
     return false;
