@@ -17,7 +17,7 @@ npm run install-both
 ```
 
 **3. Creating MongoDb**<br>
-create a mongo instance and create collection with name **_users_** and insert a dummy admin user data provided below
+create a mongo instance and create collection with name **_users_** and insert a dummy admin user data provided below<br>
 default password is **password**
 
 ```json
